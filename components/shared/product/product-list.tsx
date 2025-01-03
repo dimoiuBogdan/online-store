@@ -1,10 +1,10 @@
 import { LIMIT_PRODUCTS } from "@/lib/constants";
-import type { Product } from "@/types";
+import type { ProductType } from "@/types";
 import type { FC } from "react";
 import ProductCard from "./product-card";
 
 type Props = {
-  data: Product[];
+  data: ProductType[];
   title: string;
   limit?: number;
 };
@@ -18,7 +18,7 @@ const ProductList: FC<Props> = ({ data, title, limit = LIMIT_PRODUCTS }) => {
       <div className="flex flex-wrap gap-4">
         {limitedData.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {limitedData.map((product: Product) => (
+            {limitedData.map((product: ProductType) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>

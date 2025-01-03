@@ -1,12 +1,12 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import type { Product } from "@/types";
+import type { ProductType } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import type { FC } from "react";
 import ProductPrice from "./product-price";
 
 type Props = {
-  product: Product;
+  product: ProductType;
 };
 
 const ProductCard: FC<Props> = ({ product }) => {
