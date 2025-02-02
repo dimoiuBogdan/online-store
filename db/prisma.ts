@@ -17,17 +17,86 @@ const adapter = new PrismaNeon(pool);
 // Extends the PrismaClient with a custom result transformer to convert the price and rating fields to strings.
 export const prisma = new PrismaClient({ adapter }).$extends({
   result: {
+    cart: {
+      itemsPrice: {
+        needs: { itemsPrice: true },
+        compute(cart: unknown) {
+          // @ts-expect-error prisma types are not up to date
+          return cart.itemsPrice.toString();
+        },
+      },
+      shippingPrice: {
+        needs: { shippingPrice: true },
+        compute(cart: unknown) {
+          // @ts-expect-error prisma types are not up to date
+          return cart.shippingPrice.toString();
+        },
+      },
+      taxPrice: {
+        needs: { taxPrice: true },
+        compute(cart: unknown) {
+          // @ts-expect-error prisma types are not up to date
+          return cart.taxPrice.toString();
+        },
+      },
+      totalPrice: {
+        needs: { totalPrice: true },
+        compute(cart: unknown) {
+          // @ts-expect-error prisma types are not up to date
+          return cart.totalPrice.toString();
+        },
+      },
+    },
+    order: {
+      itemsPrice: {
+        needs: { itemsPrice: true },
+        compute(cart: unknown) {
+          // @ts-expect-error prisma types are not up to date
+          return cart.itemsPrice.toString();
+        },
+      },
+      shippingPrice: {
+        needs: { shippingPrice: true },
+        compute(cart: unknown) {
+          // @ts-expect-error prisma types are not up to date
+          return cart.shippingPrice.toString();
+        },
+      },
+      taxPrice: {
+        needs: { taxPrice: true },
+        compute(cart: unknown) {
+          // @ts-expect-error prisma types are not up to date
+          return cart.taxPrice.toString();
+        },
+      },
+      totalPrice: {
+        needs: { totalPrice: true },
+        compute(cart: unknown) {
+          // @ts-expect-error prisma types are not up to date
+          return cart.totalPrice.toString();
+        },
+      },
+    },
+    orderItem: {
+      price: {
+        needs: { price: true },
+        compute(orderItem: unknown) {
+          // @ts-expect-error prisma types are not up to date
+          return orderItem.price.toString();
+        },
+      },
+    },
     product: {
       price: {
         compute(product: unknown) {
           // @ts-expect-error prisma types are not up to date
-          return product.price.toString();
+          return product?.price?.toString();
         },
       },
       rating: {
         compute(product: unknown) {
           // @ts-expect-error prisma types are not up to date
-          return product.rating.toString();
+          return product?.rating?.toString();
         },
       },
     },

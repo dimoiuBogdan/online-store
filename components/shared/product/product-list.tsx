@@ -1,4 +1,4 @@
-import { LIMIT_PRODUCTS } from "@/lib/constants";
+import { PAGE_SIZE } from "@/lib/constants";
 import type { ProductType } from "@/types";
 import type { FC } from "react";
 import ProductCard from "./product-card";
@@ -9,7 +9,7 @@ type Props = {
   limit?: number;
 };
 
-const ProductList: FC<Props> = ({ data, title, limit = LIMIT_PRODUCTS }) => {
+const ProductList: FC<Props> = ({ data, title, limit = PAGE_SIZE }) => {
   const limitedData = data.slice(0, limit);
 
   return (

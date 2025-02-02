@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { FC } from "react";
 import ProductPrice from "./product-price";
+import Rating from "./rating";
 
 type Props = {
   product: ProductType;
@@ -29,12 +30,16 @@ const ProductCard: FC<Props> = ({ product }) => {
           <h2 className="text-sm font-medium text-nowrap">{product.name}</h2>
         </Link>
         <div className="flex-between gap-4">
-          <p>{product.rating} Stars</p>
-          {product.stock ? (
-            <ProductPrice price={+product.price} />
-          ) : (
-            <p className="text-red-500">Out of Stock</p>
-          )}
+          <div className="flex items-center gap-2">
+            <Rating value={Number(product.rating)} /> ({product.numReviews})
+          </div>
+          <div>
+            {product.stock ? (
+              <ProductPrice price={+product.price} />
+            ) : (
+              <p className="text-red-500">Out of Stock</p>
+            )}
+          </div>
         </div>
       </CardContent>
     </Card>
