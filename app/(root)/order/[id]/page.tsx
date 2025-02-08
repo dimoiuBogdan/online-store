@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { getOrderById } from "@/lib/actions/order.actions";
-import type { ShippingAddressType } from "@/types";
+import type { PaymentResultType, ShippingAddressType } from "@/types";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Stripe from "stripe";
@@ -47,6 +47,7 @@ const OrderDetailsPage = async (props: { params: Promise<{ id: string }> }) => {
       order={{
         ...order,
         shippingAddress: order.shippingAddress as ShippingAddressType,
+        paymentResult: order.paymentResult as PaymentResultType,
       }}
       stripeClientSecret={client_secret}
       paypalClientId={process.env.PAYPAL_CLIENT_ID || "sb"}

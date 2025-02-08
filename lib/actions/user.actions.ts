@@ -12,11 +12,11 @@ import {
   type updateUserSchema,
 } from "@/types/validators";
 import type { Prisma } from "@prisma/client";
-import { hash } from "bcrypt-ts-edge";
 import { revalidatePath } from "next/cache";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import type { z } from "zod";
 import { PAGE_SIZE } from "../constants";
+import { hash } from "../encrypt";
 import { formatError } from "../utils";
 
 export async function signInWithCredentials(
@@ -66,7 +66,7 @@ export async function signUpWithCredentials(
       confirmPassword: formData.get("confirmPassword"),
     });
 
-    const hashedPassword = await hash(user.password, 10);
+    const hashedPassword = await hash(user.password);
 
     await prisma.user.create({
       data: {

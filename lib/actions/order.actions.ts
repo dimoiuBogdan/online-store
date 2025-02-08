@@ -2,7 +2,8 @@
 
 import { auth } from "@/auth";
 import { prisma } from "@/db/prisma";
-import type { PaymentResultType } from "@/types";
+import { sendPurchaseReceipt } from "@/email";
+import type { PaymentResultType, ShippingAddressType } from "@/types";
 import { insertOrderSchema } from "@/types/validators";
 import type { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
@@ -261,6 +262,14 @@ export async function updateOrderToPaid(
   if (!updatedOrder) {
     throw new Error("Order not found");
   }
+
+  sendPurchaseReceipt({
+    order: {
+      ...updatedOrder,
+      shippingAddress: updatedOrder.shippingAddress as ShippingAddressType,
+      paymentResult: updatedOrder.paymentResult as PaymentResultType,
+    },
+  });
 }
 
 // Get orders by user id
